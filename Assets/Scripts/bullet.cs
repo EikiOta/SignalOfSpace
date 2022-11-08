@@ -4,12 +4,27 @@ using UnityEngine;
 
 public class bullet : MonoBehaviour
 {
-    private float bulletBound = 4.5f; //’e‚Ì‹——£ãŒÀ‚ð“ü‚ê‚é•Ï”
-
+    private float bulletBound = 4.5f; //ï¿½eï¿½Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïï¿½
+    public AudioClip se;
     // Start is called before the first frame update
     void Start()
     {
         
+    }
+
+
+     private void OnTriggerEnter2D(Collider2D col)
+    {
+        // æ•µã ã£ãŸã‚‰
+        if (col.gameObject.tag == "Enemy")
+        {
+            AudioSource.PlayClipAtPoint(se, new Vector3(0.0f, 0.0f, -10.0f));//new Vector3(0.0f, 0.0f, -10.0f)ã€€ï¼ˆãƒ¡ã‚¤ãƒ³ã‚«ãƒ¡ãƒ©ã®ä½ç½®ï¼‰ -> transform.positionã ã¨çˆ†ç™ºã—ãŸä½ç½®ã§éŸ³ãŒé³´ã‚‹ãŸã‚å°ã•ããªã‚‹
+            // ã¶ã¤ã‹ã£ãŸç›¸æ‰‹ã‚’ç ´å£Š
+            Destroy(col.gameObject);
+ 
+            // å¼¾ã‚’ç ´å£Š
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -17,7 +32,7 @@ public class bullet : MonoBehaviour
     {
         transform.Translate(0, 0.08f, 0);
 
-        if (transform.position.y > bulletBound) //ãŒÀ‚ð’´‚¦‚½’e‚ðÁ‹Ž
+        if (transform.position.y > bulletBound) //ï¿½ï¿½ï¿½ï¿½ð’´‚ï¿½ï¿½ï¿½ï¿½eï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             Destroy(gameObject);
         }
