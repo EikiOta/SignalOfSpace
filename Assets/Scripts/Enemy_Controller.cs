@@ -1,10 +1,10 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Controller : MonoBehaviour
 {
-    public float hitPoint; //�G��HP������ϐ�
+    public float hitPoint; //敵の体力
 
     public float Speed;     // 速度
     private float pointY;   // プレイヤーに向かってくるY軸の位置
@@ -52,11 +52,11 @@ public class Enemy_Controller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(collision.gameObject); //�G�ɐڐG�����I�u�W�F�N�g������
+        Destroy(collision.gameObject); //敵と接触したオブジェクトを消去
 
         hitPoint -= 1;
 
-        if (hitPoint <= 0) //HP��0�ȉ��Ȃ�Ώ���
+        if (hitPoint <= 0) //体力が0以下になったら敵オブジェクトを消去
         {
             Destroy(gameObject);
         }
