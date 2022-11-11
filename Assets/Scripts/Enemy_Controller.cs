@@ -5,16 +5,18 @@ using UnityEngine;
 public class Enemy_Controller : MonoBehaviour
 {
     public float hitPoint; //敵の体力
-
     public float Speed;     // 速度
+    public int score; //獲得できるスコアを入れる変数
     private float pointY;   // プレイヤーに向かってくるY軸の位置
     private float vx;           // X軸の移動量
     private GameObject player;  // プレイヤーオブジェクト取得用
+    private Game_Manager gameManager; //スクリプト"Game_Manager"を入れる変数
 
 
     // Start is called before the first frame update
     void Start()
     {
+        gameManager = GameObject.Find("GameManager").GetComponent<Game_Manager>(); //変数"gameManager"を初期化
         /*aaa*/
         // プレイヤーに向かってくるY軸の位置
         pointY = Random.Range(2.0f, 3.0f);
@@ -59,6 +61,7 @@ public class Enemy_Controller : MonoBehaviour
         if (hitPoint <= 0) //体力が0以下になったら敵オブジェクトを消去
         {
             Destroy(gameObject);
+            gameManager.UpdateScore(score); //スコアテキストのスコアを"score"の値分増やす
         }
     }
 }
