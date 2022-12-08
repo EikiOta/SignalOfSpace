@@ -12,6 +12,11 @@ public class bullet : MonoBehaviour
         
     }
 
+
+
+
+
+
      private void OnTriggerEnter2D(Collider2D col)
     {
         // 敵だったら

@@ -8,10 +8,11 @@ public class Enemy_Generator : MonoBehaviour
     int NumOfEnemys = 0;//敵の数のカウンタ
     // 敵のプレハブ
     public GameObject enemyPrefab;
+    private Game_Manager gameManager; //スクリプト"Game_Manager"を入れる変数
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GameObject.Find("GameManager").GetComponent<Game_Manager>(); //変数"gameManager"を初期化
     }
 
     // Update is called once per frame
@@ -29,8 +30,14 @@ public class Enemy_Generator : MonoBehaviour
             Instantiate(enemyPrefab, pos, Quaternion.identity);
             
             NumOfEnemys++;//カウンタを1増やす
-        }else{
+        }
+        else if (NumOfEnemys == maxNumOfEnemys)
+        {
             /*全ての敵が出現したため、GameClearの処理を記述*/
+            if (GameObject.Find("Enemy1(Clone)") == null)
+            {
+                gameManager.GameClear();
+            }
         }
     }
 }
