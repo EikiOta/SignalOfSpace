@@ -18,25 +18,27 @@ public class Enemy_Generator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        // 敵をランダムに生成
-
-        /*enemyの総数がインスペクタで指定したmaxNumOfEnemysを下回っている場合、かつ0~500の間の乱数で1になった場合に敵を出現.
-        つまりRandom.Rangeの引数の差を大きくすれば1の出現確率は減り、敵の出現も実行されにくくなる.*/
-        if(NumOfEnemys < maxNumOfEnemys && Random.Range(0, 500) == 1)
+        if (gameManager.isActive) //ゲームを開始していないときは停止
         {
-            /*出現*/
-            Vector3 pos = new Vector3(Random.Range(-2.8f, 2.8f), 5.5f, 0);  // 画面上方に生成
-            Instantiate(enemyPrefab, pos, Quaternion.identity);
-            
-            NumOfEnemys++;//カウンタを1増やす
-        }
-        else if (NumOfEnemys == maxNumOfEnemys)
-        {
-            /*全ての敵が出現したため、GameClearの処理を記述*/
-            if (GameObject.Find("Enemy1(Clone)") == null)
+            // 敵をランダムに生成
+
+            /*enemyの総数がインスペクタで指定したmaxNumOfEnemysを下回っている場合、かつ0~500の間の乱数で1になった場合に敵を出現.
+            つまりRandom.Rangeの引数の差を大きくすれば1の出現確率は減り、敵の出現も実行されにくくなる.*/
+            if (NumOfEnemys < maxNumOfEnemys && Random.Range(0, 500) == 1)
             {
-                gameManager.GameClear();
+                /*出現*/
+                Vector3 pos = new Vector3(Random.Range(-2.8f, 2.8f), 5.5f, 0);  // 画面上方に生成
+                Instantiate(enemyPrefab, pos, Quaternion.identity);
+
+                NumOfEnemys++;//カウンタを1増やす
+            }
+            else if (NumOfEnemys == maxNumOfEnemys)
+            {
+                /*全ての敵が出現したため、GameClearの処理を記述*/
+                if (GameObject.Find("Enemy1(Clone)") == null)
+                {
+                    gameManager.GameClear();
+                }
             }
         }
     }

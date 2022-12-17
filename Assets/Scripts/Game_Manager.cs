@@ -10,7 +10,9 @@ public class Game_Manager : MonoBehaviour
     public TextMeshProUGUI scoreText; //スコア用のテキストを入れる変数
     public TextMeshProUGUI gameCrearText; //ゲームクリア用のテキストを入れる変数
     public Button restartButton; //リスタートのボタンを入れる変数
+    public GameObject titleScreen; //タイトル画面を入れる変数
     private int score; //スコアを入れる変数
+    public bool isActive; //ゲームが開始しているかを判定する変数
 
     // Start is called before the first frame update
     void Start()
@@ -42,5 +44,19 @@ public class Game_Manager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); //シーンを再読み込みする
+    }
+
+    //ゲームスタートの処理をする関数
+    public void StartGame()
+    {
+        titleScreen.gameObject.SetActive(false);
+        isActive = true;
+    }
+
+    //ゲームをやめる処理をする関数
+    public void ExitGame()
+    {
+            UnityEditor.EditorApplication.isPlaying = false; //ゲームプレイ終了(UnityEditor上でプレイ)
+            Application.Quit(); //ゲームプレイ終了(ビルドしたゲームをプレイ)
     }
 }
