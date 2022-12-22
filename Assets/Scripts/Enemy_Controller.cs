@@ -10,8 +10,11 @@ public class Enemy_Controller : MonoBehaviour
     private float pointY;   // プレイヤーに向かってくるY軸の位置
     private float vx;           // X軸の移動量
     private GameObject player;  // プレイヤーオブジェクト取得用
+    //
+    public GameObject bullet;
+    float bulletCooldown = 0;
+    //
     private Game_Manager gameManager; //スクリプト"Game_Manager"を入れる変数
-
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +31,8 @@ public class Enemy_Controller : MonoBehaviour
             vx = -vx;
         }
         /*aaa*/
+
+        
     }
 
     // Update is called once per frame
@@ -50,10 +55,22 @@ public class Enemy_Controller : MonoBehaviour
              Destroy(gameObject);
          }
         /*aa*/
+
+        if (bulletCooldown > 0.7f)//ここの条件式の数字を増減させることで、弾発射頻度を調整できる。
+        {
+            bulletCooldown = 0;
+            Instantiate(bullet,transform.position, transform.rotation);//弾生成 **敵の弾の発射位置がおかしい. 第二引数"transform.position"をVector3などに変更したが、改善せず.弾を敵の子オブジェクトにする必要ありか？
+        }
+
+        bulletCooldown += Time.deltaTime; //時間をためていく
+        //aaa
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        /*以下自機に衝突した場合の処理. タグで分けることで敵同士の衝突による消去を防ぐ.*/
+        if(collision.gameObject.tag == "own_bullet"){
+        
         Destroy(collision.gameObject); //敵と接触したオブジェクトを消去
 
         hitPoint -= 1;
@@ -63,5 +80,6 @@ public class Enemy_Controller : MonoBehaviour
             Destroy(gameObject);
             gameManager.UpdateScore(score); //スコアテキストのスコアを"score"の値分増やす
         }
+    }
     }
 }

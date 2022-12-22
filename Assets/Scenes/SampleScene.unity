@@ -1604,9 +1604,10 @@ GameObject:
   - component: {fileID: 1898432292}
   - component: {fileID: 1898432291}
   - component: {fileID: 1898432293}
+  - component: {fileID: 1898432294}
   m_Layer: 0
   m_Name: ownMachine
-  m_TagString: Untagged
+  m_TagString: own_machine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1691,6 +1692,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 4361053351236432069, guid: 88e730e37288d8e449204f0cb9b4dddb, type: 3}
+--- !u!58 &1898432294
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898432290}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.4999999
 --- !u!1 &1956910557
 GameObject:
   m_ObjectHideFlags: 0
