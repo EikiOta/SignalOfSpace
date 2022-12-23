@@ -26,13 +26,14 @@ public class Enemy_Controller : MonoBehaviour
         // 敵の初期位置とプレイヤーの位置によってX軸の移動方向を決定する（プレイヤーに向かってくるような設定）
         vx = 1.0f;
         player = GameObject.Find("ownMachine");
-        if(player.transform.position.x < transform.position.x)
+        if (player != null) //自機が消去された後のnull処理をしないとエラーをはいたので追加した
         {
-            vx = -vx;
+            if (player.transform.position.x < transform.position.x)
+            {
+                vx = -vx;
+            }
         }
         /*aaa*/
-
-        
     }
 
     // Update is called once per frame
@@ -69,17 +70,18 @@ public class Enemy_Controller : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         /*以下自機に衝突した場合の処理. タグで分けることで敵同士の衝突による消去を防ぐ.*/
-        if(collision.gameObject.tag == "own_bullet"){
-        
-        Destroy(collision.gameObject); //敵と接触したオブジェクトを消去
-
-        hitPoint -= 1;
-
-        if (hitPoint <= 0) //体力が0以下になったら敵オブジェクトを消去
+        if(collision.gameObject.tag == "own_bullet")
         {
-            Destroy(gameObject);
-            gameManager.UpdateScore(score); //スコアテキストのスコアを"score"の値分増やす
+        
+            Destroy(collision.gameObject); //敵と接触したオブジェクトを消去
+
+            hitPoint -= 1;
+
+            if (hitPoint <= 0) //体力が0以下になったら敵オブジェクトを消去
+            {
+                Destroy(gameObject);
+                gameManager.UpdateScore(score); //スコアテキストのスコアを"score"の値分増やす
+            }
         }
-    }
     }
 }

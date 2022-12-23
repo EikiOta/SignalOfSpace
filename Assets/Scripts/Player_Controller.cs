@@ -9,7 +9,7 @@ public class Player_Controller : MonoBehaviour
     private float xBound = 2.4f; //xの上限を入れる変数
     private float yBound = 4.5f; //yの上限を入れる変数
     private Game_Manager gameManager; //スクリプト"Game_Manager"を入れる変数
-
+    public float playerHitPoint; //自機のHPを入れる変数
     public GameObject bullet;
     // Start is called before the first frame update
     void Start()

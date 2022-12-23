@@ -9,6 +9,7 @@ public class Game_Manager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText; //スコア用のテキストを入れる変数
     public TextMeshProUGUI gameCrearText; //ゲームクリア用のテキストを入れる変数
+    public TextMeshProUGUI gameOverText; //ゲームオーバー用のテキストを入れる変数
     public Button restartButton; //リスタートのボタンを入れる変数
     public GameObject titleScreen; //タイトル画面を入れる変数
     private int score; //スコアを入れる変数
@@ -36,6 +37,7 @@ public class Game_Manager : MonoBehaviour
     //ゲームクリア時の処理を記述する関数
     public void GameClear()
     {
+        isActive = false;
         gameCrearText.gameObject.SetActive(true); //ゲームクリアテキストを表示
         restartButton.gameObject.SetActive(true); //リスタートのボタンを表示
     }
@@ -58,5 +60,13 @@ public class Game_Manager : MonoBehaviour
     {
             UnityEditor.EditorApplication.isPlaying = false; //ゲームプレイ終了(UnityEditor上でプレイ)
             Application.Quit(); //ゲームプレイ終了(ビルドしたゲームをプレイ)
+    }
+
+    //ゲームオーバーの処理をする関数
+    public void GameOver()
+    {
+        isActive = false;
+        gameOverText.gameObject.SetActive(true); //ゲームオーバーテキストを表示
+        restartButton.gameObject.SetActive(true); //リスタートのボタンを表示
     }
 }
